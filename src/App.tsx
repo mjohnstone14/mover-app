@@ -12,7 +12,7 @@ function App() {
   const positions = driverPos['positions'];
   const [coordinates, setCoordinates] = useState();
   const [popupInfo, setPopupInfo] = useState({longitude: 0, latitude: 0, timestamp: 'none'});
-  const TOKEN = 'pk.eyJ1IjoibWpvaG5zdG9uZSIsImEiOiJjbGZ3dHZzZWwwYXphM3FscWZkbjltb2txIn0.CvGVdnNpCdsgaHp_3CQnIw'
+  const TOKEN = process.env.REACT_APP_MAP_TOKEN;
 
   const layerStyle : any = {
     id: 'line',
