@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback} from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Map, {Layer, Source, Marker, NavigationControl, FullscreenControl, GeolocateControl, ScaleControl, Popup} from 'react-map-gl';
 import driverPos from './data/driver-positions.json';
 import {Coordinate} from '../interfaces/driverTrackerInterface';
@@ -72,7 +72,7 @@ function App() {
    * Generate GeoJSON to plot a line mapping the driver's route from
    * start to finish
    */
-  const plotLineFromDriverData = useCallback(() => {
+  const plotLineFromDriverData = () => {
     const driverGeojson : any = {
       type: 'FeatureCollection',
       features: [
@@ -94,13 +94,13 @@ function App() {
       let current = [coord.longitude, coord.latitude]
       driverGeojson['features'][0]['geometry']['coordinates'] = [...driverGeojson['features'][0]['geometry']['coordinates'], current]
     }
-
     return driverGeojson;
-  },[driverInfo, positions]);
+  };
+
 
   useEffect(() => {
     setCoordinates(plotLineFromDriverData());
-  }, [plotLineFromDriverData])
+  }, [])
 
   return (
     <div className="App">
@@ -142,9 +142,12 @@ function App() {
             onClose={() => setPopupInfo({longitude: 0, latitude: 0, timestamp: ''})}
           >
             <div>
+              <h4>ID: {driverInfo.id}</h4>
               <p>Driver: {driverInfo.name}</p>
-              <p>OS: {driverInfo.os}</p>
+              <p>OS: {driverInfo.os} v{driverInfo.version}</p>
               <p>Timestamp: {new Date(popupInfo.timestamp).toString()}</p>
+              <h4>Phone:</h4>
+              <p>Number: {driverInfo.phone.countryCallingCode}-{driverInfo.phone.nationalNumber}</p>
             </div>
           </Popup>
         )}
