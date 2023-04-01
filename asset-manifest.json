@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/mover-app/static/css/main.600bff5f.css",
-    "main.js": "/mover-app/static/js/main.f870b8e2.js",
+    "main.js": "/mover-app/static/js/main.af8324c2.js",
     "static/js/483.7276041a.chunk.js": "/mover-app/static/js/483.7276041a.chunk.js",
     "static/js/787.8e0ad2ee.chunk.js": "/mover-app/static/js/787.8e0ad2ee.chunk.js",
     "index.html": "/mover-app/index.html",
     "static/media/flag.svg": "/mover-app/static/media/flag.4674367dea2ee5d1f73188881becdc57.svg",
     "static/media/finish.svg": "/mover-app/static/media/finish.4512e4dddeb62be901d97a53cc6581de.svg",
     "main.600bff5f.css.map": "/mover-app/static/css/main.600bff5f.css.map",
-    "main.f870b8e2.js.map": "/mover-app/static/js/main.f870b8e2.js.map",
+    "main.af8324c2.js.map": "/mover-app/static/js/main.af8324c2.js.map",
     "483.7276041a.chunk.js.map": "/mover-app/static/js/483.7276041a.chunk.js.map",
     "787.8e0ad2ee.chunk.js.map": "/mover-app/static/js/787.8e0ad2ee.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.600bff5f.css",
-    "static/js/main.f870b8e2.js"
+    "static/js/main.af8324c2.js"
   ]
 }
