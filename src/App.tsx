@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import Map, {Layer, Source, Marker, NavigationControl, FullscreenControl, GeolocateControl, ScaleControl, Popup} from 'react-map-gl';
 import driverPos from './data/driver-positions.json';
 import {Coordinate} from '../interfaces/driverTrackerInterface';
@@ -11,7 +11,7 @@ function App() {
   const driverInfo = driverPos['driver'];
   const positions = driverPos['positions'];
   const [coordinates, setCoordinates] = useState();
-  const [popupInfo, setPopupInfo] = useState({longitude: 0, latitude: 0, timestamp: 'none'});
+  const [popupInfo, setPopupInfo] : any = useState({longitude: 0, latitude: 0, timestamp: 'none'});
   const TOKEN = process.env.REACT_APP_MAP_TOKEN;
 
   const layerStyle : any = {
@@ -94,13 +94,13 @@ function App() {
       let current = [coord.longitude, coord.latitude]
       driverGeojson['features'][0]['geometry']['coordinates'] = [...driverGeojson['features'][0]['geometry']['coordinates'], current]
     }
+    setCoordinates(driverGeojson);
     return driverGeojson;
-  };
+  }
 
-
-  useEffect(() => {
-    setCoordinates(plotLineFromDriverData());
-  }, [])
+  const load = () => {
+    plotLineFromDriverData();
+  }
 
   return (
     <div className="App">
@@ -116,6 +116,7 @@ function App() {
         style={{width: '100vw', height: '90vh'}}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={TOKEN}
+        onLoad={load}
       > 
         <GeolocateControl position="top-left"/>
         <FullscreenControl position="top-left"/>
@@ -133,13 +134,14 @@ function App() {
           <Layer {...layerStyle}/>
         </Source>
 
-        {pins}
         {popupInfo && (
           <Popup
             anchor="top"
             longitude={Number(popupInfo.longitude)}
             latitude={Number(popupInfo.latitude)}
-            onClose={() => setPopupInfo({longitude: 0, latitude: 0, timestamp: ''})}
+            onClose={() => setPopupInfo(null)}
+            closeOnClick={false}
+            closeOnMove={false}
           >
             <div>
               <h4>ID: {driverInfo.id}</h4>
@@ -151,6 +153,7 @@ function App() {
             </div>
           </Popup>
         )}
+        {pins}
       </Map>
     </div>
   );
